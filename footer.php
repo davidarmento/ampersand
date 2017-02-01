@@ -6,7 +6,9 @@
 					<p>&copy; <?php bloginfo('name'); ?>, <?=date('Y');?>. Mi primer tema de WP.</p>
 				</div>
 				<div class="col-md-6">
-						<p>asd</p>
+					<?php if ( is_active_sidebar( 'footer-widget-area' ) ) : ?>
+					<?php dynamic_sidebar( 'footer-widget-area' ); ?>
+					<?php endif; ?>
 				</div>
 				<div class="clear"></div>
 			</div>

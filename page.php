@@ -23,7 +23,9 @@
   	        </section>
         </div>
         <div class="col-md-4">
-            <?php get_sidebar()?>
+            <aside itemtype="http://schema.org/WPSideBar" itemscope="itemscope" role="complementary"
+                <?php get_sidebar()?>
+            </aside>
         </div>
     </div>
 </div>

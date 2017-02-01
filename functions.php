@@ -35,4 +35,55 @@ function enable_threaded_comments(){
 }
 add_action('get_header', 'enable_threaded_comments');
 
+//Sidebars
+
+//Header
+function header_sidebar() {
+    register_sidebar(
+        array (
+            'name' => __( 'Header', 'your-theme-domain' ),
+            'id' => 'header-widget-area',
+            'description' => __( 'Header widget area', 'your-theme-domain' ),
+            'before_widget' => '<div class="header-widget-area">',
+            'after_widget' => "</div>",
+            'before_title' => '<h3 class="widget-title">',
+            'after_title' => '</h3>',
+        )
+    );
+}
+add_action( 'widgets_init', 'header_sidebar' );
+
+//Footer
+function footer_sidebar() {
+    register_sidebar(
+        array (
+            'name' => __( 'Footer', 'your-theme-domain' ),
+            'id' => 'footer-widget-area',
+            'description' => __( 'Footer widget area', 'your-theme-domain' ),
+            'before_widget' => '<div class="footer-widget-area">',
+            'after_widget' => "</div>",
+            'before_title' => '<h3 class="widget-title">',
+            'after_title' => '</h3>',
+        )
+    );
+}
+add_action( 'widgets_init', 'footer_sidebar' );
+
+//Sidebar Sidebar
+function the_sidebar() {
+    register_sidebar(
+        array (
+            'name' => __( 'Regular Sidebar', 'your-theme-domain' ),
+            'id' => 'regular-sidebar',
+            'description' => __( '', 'your-theme-domain' ),
+            'before_widget' => '<div class="regular-sidebar">',
+            'after_widget' => "</div><hr>",
+            'before_title' => '<h3 class="widget-title">',
+            'after_title' => '</h3>',
+        )
+    );
+}
+add_action( 'widgets_init', 'the_sidebar' );
+
+
 ?>

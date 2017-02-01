@@ -31,10 +31,30 @@
 		nav a:hover { background-color:#444 }
 		footer { clear: both; margin-top: 80px; background-color:#333; padding:40px 100px; }
 		footer p { color:#ccc; font-size:16px; }
+		footer p a { color:#ccc; }
+		footer p a:hover { color:#fff; }
+		.footer-right { text-align: right; }
 
 		h1 { padding: 0; margin: 0; color:#444; font-size:32px; margin-bottom:40px; }
+		h2 { padding: 0; margin: 0; color:#444; font-size:26px; margin-bottom:40px; }
+		h3 { padding: 0; margin: 0; color:#444; font-size:20px; margin-bottom:40px; }
 		p { font-size:19px; margin-bottom:30px; color:#555; line-height: 28px; }
 		a { color:#2489CC; text-decoration: none; }
+		hr { border: 0; height: 1px; background: #ccc; margin-top:50px; margin-bottom:40px; }
+		blockquote {  background-color:#f0f0f0; border-bottom:3px solid #ccc; margin:0; padding:10px 30px; margin-bottom:60px; border-radius:4px;  }
+		ul { margin:0 0 0 20px; padding: 0; margin-bottom:60px; }
+		li { margin-bottom:12px; font-size:16px; }
+
+		/* Widgets */
+		.header-widget-area { text-align: right; }
+		.footer-widget-area { text-align: right; }
+		#sidebar hr:last-child { display: none; }
+
+		/* Sidebar */
+		#sidebar hr:last-child { display: none; }
+		#sidebar h3 { margin-bottom:20px; }
+		#sidebar ul { list-style: none; margin: 0; padding: 0; }
+		#sidebar li { margin-bottom:8px; font-size:16px; }
 
 		/* Mini-Boostrap*/
 		.row { margin-right: -15px; margin-left: -15px; }
@@ -43,15 +63,19 @@
 		.text-center { text-align: center; }
 		.container { margin: 0 auto; width: 1200px; }
 		table { width: 100%; padding:10px; color:#555; }
+		.col-lg-10,.col-md-10 { width: 83.33333333%; float:left; }
+		.col-lg-9,.col-md-9 { width: 75%; float:left; }
 		.col-lg-8,.col-md-8 { width: 66.66666667%; float:left; }
 		.col-lg-7,.col-md-7 { width: 58.33333333%; float:left; }
 		.col-lg-6,.col-md-6 { width: 50%; float:left; }
 		.col-lg-5,.col-md-5 { width: 41.66666666%; float:left; }
 		.col-lg-4,.col-md-4 { width: 33.33333333%; float:left; }
 		.col-lg-3,.col-md-3 { width: 25%; float:left; }
+		.col-lg-2,.col-md-2 { width: 16.66666666%; float:left; }
+		.col-lg-1,.col-md-1 { width: 8.33333333%; float:left; }
 
 		@media (max-width: 768px) {
-			.container-post { width: 90%; }
+			.container { width: 90%; }
 			.text-right {text-align: center; }
 			.pad ul.categories li a { float: left; margin-top: 20px; margin-left:0; margin-right: 10px; }
 			footer { text-align: center; }
@@ -65,29 +89,31 @@
 			.slider h1 { padding:80px 0 0 0; font-size:38px; }
 			.col-lg-8,.col-md-7,.col-md-6,.col-md-5,.col-lg-4,.col-md-4,.col-md-3 { width: 100%; float:left; } .img-responsive { width:100%; height: auto; } .sr-only { display: none; }
 		}
-		@media (min-width: 769px) and (max-width: 991px) { .container-post { width: 90%; } header .btn { display: none; } .col-lg-4,.col-md-4 { width: 50%; } .col-lg-3,.col-md-3 { width: 50%; } .col-lg-8,.col-md-7,.col-md-5 { width: 100%; float:left; } .col-md-6 { width: 50%; float:left; } .img-responsive { width:100%; height: auto; } }
+		@media (min-width: 769px) and (max-width: 991px) { .container { width: 90%; } header .btn { display: none; } .col-lg-4,.col-md-4 { width: 50%; } .col-lg-3,.col-md-3 { width: 50%; } .col-lg-8,.col-md-7,.col-md-5 { width: 100%; float:left; } .col-md-6 { width: 50%; float:left; } .img-responsive { width:100%; height: auto; } }
 		@media (min-width: 769px) and (max-width: 1400px) { .pad ul.categories { float: left; clear: both; } .pad ul.categories li a { float: left; margin-top: 20px; margin-left:0; margin-right: 10px; } }
 		@media (min-width: 992px) and (max-width: 1770px) { .col-lg-4,.col-md-4 { width: 50%; } .col-lg-3,.col-md-3 { width: 50%; } }
 	</style>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 </head>
-<body>
-		<header>
-				<div class="container">
-						<div class="row">
-								<div class="col-md-6">
-										<p class="site-title"><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name'); ?></a></p>
-										<p itemprop="description"><?php bloginfo('description'); ?></p>
-								</div>
-								<div class="col-md-6">
-
-								</div>
+<body itemtype="http://schema.org/Blog" itemscope="itemscope">
+	<header itemtype="http://schema.org/WPHeader" itemscope="itemscope">
+		<div class="container">
+				<div class="row">
+						<div class="col-md-6">
+								<p class="site-title"><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name'); ?></a></p>
+								<p itemprop="description"><?php bloginfo('description'); ?></p>
 						</div>
-						<div class="clear"></div>
+						<div class="col-md-6">
+							<?php if ( is_active_sidebar( 'header-widget-area' ) ) : ?>
+							<?php dynamic_sidebar( 'header-widget-area' ); ?>
+							<?php endif; ?>
+						</div>
 				</div>
-		</header>
-	<div class="nav">
+				<div class="clear"></div>
+		</div>
+	</header>
+	<div class="nav" itemtype="http://schema.org/SiteNavigationElement" itemscope="itemscope">
 		<div class="container">
 			<div class="row">
 				<?php wp_nav_menu( array('menu' => 'Main', 'container' => 'nav' )); ?>

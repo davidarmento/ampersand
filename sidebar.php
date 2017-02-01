@@ -1,4 +1,5 @@
 <section id="sidebar">
-	<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Main Sidebar') ) : ?>
+	<?php if ( is_active_sidebar( 'regular-sidebar' ) ) : ?>
+	<?php dynamic_sidebar( 'regular-sidebar' ); ?>
 	<?php endif; ?>
 </section>
