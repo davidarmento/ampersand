@@ -16,18 +16,25 @@
 	<?php wp_head(); ?>
 
 	<style>
-		body { margin:0; font-family:Arial; font-weight: 300; font-size: 14px; color: #444; background:#fff; overflow-x: hidden; }
-		header { clear: both; }
-		.nav { clear: both; background:#3e9ddd; }
+		body { margin:0; font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: 14px; color: #444; background:#fff; overflow-x: hidden; }
+		header { clear: both; padding:38px 0; }
+		header .site-title { padding: 0; margin: 0; margin-bottom:10px; }
+		header .site-title a { color:#444; text-decoration: none; font-size: 54px; }
+		header p { font-size: 17px; padding: 0; margin: 0; }
+		.nav { clear: both; background:#3e9ddd; margin-bottom:60px; }
 		.nav ul { padding: 0; margin: 0; list-style: none;}
-		nav a { display: block; float: left; padding:18px 14px; font-size:17px; text-decoration: none; color:#fff;
+		nav a { display: block; float: left; padding:22px 14px; font-size:18px; text-decoration: none; color:#fff;
 			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
-		    font-weight: 600;
-		    line-height: 2.2em;
-		    font-family: Helvetica, Arial, sans-serif;
+		    font-weight: 400;
+		    line-height: 2.2em
 		}
-		nav a:hover { background-color:#333 }
-		footer { clear: both; margin-top: 40px;}
+		nav a:hover { background-color:#444 }
+		footer { clear: both; margin-top: 80px; background-color:#333; padding:40px 100px; }
+		footer p { color:#ccc; font-size:16px; }
+
+		h1 { padding: 0; margin: 0; color:#444; font-size:32px; margin-bottom:40px; }
+		p { font-size:19px; margin-bottom:30px; color:#555; line-height: 28px; }
+		a { color:#2489CC; text-decoration: none; }
 
 		/* Mini-Boostrap*/
 		.row { margin-right: -15px; margin-left: -15px; }
@@ -62,25 +69,29 @@
 		@media (min-width: 769px) and (max-width: 1400px) { .pad ul.categories { float: left; clear: both; } .pad ul.categories li a { float: left; margin-top: 20px; margin-left:0; margin-right: 10px; } }
 		@media (min-width: 992px) and (max-width: 1770px) { .col-lg-4,.col-md-4 { width: 50%; } .col-lg-3,.col-md-3 { width: 50%; } }
 	</style>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 </head>
 <body>
-	<header>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<h1><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name'); ?></a></h1>
+		<header>
+				<div class="container">
+						<div class="row">
+								<div class="col-md-6">
+										<p class="site-title"><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name'); ?></a></p>
+										<p itemprop="description"><?php bloginfo('description'); ?></p>
+								</div>
+								<div class="col-md-6">
+
+								</div>
+						</div>
+						<div class="clear"></div>
 				</div>
-				<div class="col-md-6">
-					asd
-				</div>
-			</div>
-			<div class="clear"></div>
-		</div>
-	</header>
+		</header>
 	<div class="nav">
 		<div class="container">
-			<?php wp_nav_menu( array('menu' => 'Main', 'container' => 'nav' )); ?>
+			<div class="row">
+				<?php wp_nav_menu( array('menu' => 'Main', 'container' => 'nav' )); ?>
+			</div>
 		</div>
 		<div class="clear"></div>
 	</div>
