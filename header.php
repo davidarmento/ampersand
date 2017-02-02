@@ -15,13 +15,21 @@
 
 	<?php wp_head(); ?>
 
+	<?php
+	//Color principal
+	$color = '#3e9ddd';
+
+	//Color Enlaces
+	$colorLinks = '#2489CC';
+	?>
+
 	<style>
 		body { margin:0; font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: 14px; color: #444; background:#fff; overflow-x: hidden; }
 		header { clear: both; padding:38px 0; }
 		header .site-title { padding: 0; margin: 0; margin-bottom:10px; }
 		header .site-title a { color:#444; text-decoration: none; font-size: 54px; }
 		header p { font-size: 17px; padding: 0; margin: 0; }
-		.nav { clear: both; background:#3e9ddd; margin-bottom:60px; }
+		.nav { clear: both; background:<?php echo $color ?>; margin-bottom:60px; }
 		.nav ul { padding: 0; margin: 0; list-style: none;}
 		nav a { display: block; float: left; padding:22px 14px; font-size:18px; text-decoration: none; color:#fff;
 			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
@@ -36,11 +44,14 @@
 		aside { padding-left: 40px; }
 		.footer-right { text-align: right; }
 
-		.mobile-menu { display: none; cursor: pointer; padding:10px 0; }
-		.bar1, .bar2, .bar3 { width: 35px; height: 5px; background-color: #fff; border-radius:4px; margin: 6px 0; transition: 0.4s; }
-		.change .bar1 { -webkit-transform: rotate(-45deg) translate(-9px, 6px); transform: rotate(-45deg) translate(-9px, 6px); }
+		.mobile-header { display: none; position: fixed; width: 100%; top: 0; left: 0; z-index: 10000; text-align: center; background:<?php echo $color ?>; padding:10px 0; }
+		.mobile-title a { color:#fff; font-size:26px; }
+		.pc-header { display: block; }
+		.mobile-menu { display:block; margin-left: 28px; margin-top: -30px; cursor: pointer; z-index:999999;}
+		.bar1, .bar2, .bar3 { width: 28px; height: 4px; background-color: #fff; border-radius:4px; margin: 5px 0; transition: 0.4s; }
+		.change .bar1 { -webkit-transform: rotate(-45deg) translate(-7px, 6px); transform: rotate(-45deg) translate(-7px, 6px); }
 		.change .bar2 { opacity: 0; }
-		.change .bar3 { -webkit-transform: rotate(45deg) translate(-8px, -8px); transform: rotate(45deg) translate(-8px, -8px); }
+		.change .bar3 { -webkit-transform: rotate(45deg) translate(-7px, -6px); transform: rotate(45deg) translate(-7px, -6px); }
 
 		.comentarios { border-top: 1px solid #ccc; padding-top: 40px; margin-top: 40px; }
 		.commentlist { list-style: none; padding: 0}
@@ -53,7 +64,7 @@
 		h2 { padding: 0; margin: 0; color:#444; font-size:26px; margin-bottom:40px; }
 		h3 { padding: 0; margin: 0; color:#444; font-size:20px; margin-bottom:40px; }
 		p { font-size:19px; margin-bottom:30px; color:#555; line-height: 28px; }
-		a { color:#2489CC; text-decoration: none; }
+		a { color:<?php echo $colorLinks ?>; text-decoration: none; }
 		hr { border: 0; height: 1px; background: #ccc; margin:40px 0 40px 0; }
 		blockquote {  background-color:#f0f0f0; border-bottom:3px solid #ccc; margin:0; padding:10px 30px; margin-bottom:60px; border-radius:4px;  }
 		ul { margin:0 0 0 20px; padding: 0; margin-bottom:60px; }
@@ -93,8 +104,7 @@
 
 		@media (max-width: 768px) {
 				.col-lg-10,.col-lg-9,.col-md-8,.col-md-7,.col-md-6,.col-md-5,.col-md-4,.col-md-3,.col-md-2 { width: 100%; float:left; }
-				header .site-title a { font-size: 38px; }
-				header p { font-size: 14px; }
+				.mobile-header { display: block; }
 				p { font-size:16px; margin-bottom:30px; color:#555; line-height: 26px; }
 		}
 		@media (max-width: 1024px) {
@@ -103,13 +113,15 @@
 				.footer-widget-area { text-align: center; }
 				.img-responsive { width:100%; height: auto; }
 				.col-lg-10,.col-lg-9,.col-md-8,.col-md-7,.col-md-6,.col-md-5,.col-md-4,.col-md-3,.col-md-2 { width: 100%; float:left; }
-				.mobile-menu { display: inline-block; }
-				header { padding:20px 0; }
-				header .site-title a { font-size: 42px; }
-				header p { font-size: 16px; }
-				header .col-md-6 { width: 100%; text-align: center; }
+				.mobile-header { display: block; }
+				header { padding:0; }
+				body { padding-top:40px; }
+				.pc-header { display: none; }
 				.nav { text-align: center; }
-				nav ul { display: none; }
+				.nav { background-color: #333; }
+				.nav .container { padding: 0;}
+				nav ul li {display: block;  }
+				nav ul li a { display: block; text-align: left; border-bottom:1px solid #444; width: 100%; margin-left: 16px; font-size: 14px; padding:14px; }
 				h1 { font-size:26px; }
 				h2 { font-size:22px; margin-bottom:40px; }
 				h3 { font-size:18px; }
@@ -125,16 +137,28 @@
 <body itemtype="http://schema.org/Blog" itemscope="itemscope">
 	<header itemtype="http://schema.org/WPHeader" itemscope="itemscope">
 		<div class="container">
-				<div class="row">
-						<div class="col-md-6">
-								<p class="site-title"><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name'); ?></a></p>
-								<p itemprop="description"><?php bloginfo('description'); ?></p>
+				<div class="mobile-header">
+					<div class="row">
+						<p class="mobile-title"><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name'); ?></a></p>
+						<div class="mobile-menu" onclick="openMn(this)">
+							  <div class="bar1"></div>
+							  <div class="bar2"></div>
+							  <div class="bar3"></div>
 						</div>
-						<div class="col-md-6">
-								<?php if ( is_active_sidebar( 'header-widget-area' ) ) : ?>
-								<?php dynamic_sidebar( 'header-widget-area' ); ?>
-								<?php endif; ?>
-						</div>
+					</div>
+				</div>
+				<div class="pc-header">
+					<div class="row">
+							<div class="col-md-6">
+									<p class="site-title"><a href="<?php echo get_option('home'); ?>"><?php bloginfo('name'); ?></a></p>
+									<p itemprop="description"><?php bloginfo('description'); ?></p>
+							</div>
+							<div class="col-md-6">
+									<?php if ( is_active_sidebar( 'header-widget-area' ) ) : ?>
+									<?php dynamic_sidebar( 'header-widget-area' ); ?>
+									<?php endif; ?>
+							</div>
+					</div>
 				</div>
 				<div class="clear"></div>
 		</div>
@@ -142,11 +166,6 @@
 	<div class="nav" itemtype="http://schema.org/SiteNavigationElement" itemscope="itemscope">
 		<div class="container">
 			<div class="row">
-				<div class="mobile-menu" onclick="openMn(this)">
-					  <div class="bar1"></div>
-					  <div class="bar2"></div>
-					  <div class="bar3"></div>
-				</div>
 				<?php wp_nav_menu( array('menu' => 'Main', 'container' => 'nav' )); ?>
 			</div>
 		</div>
