@@ -14,6 +14,11 @@
 			</div>
 		</div>
 	</footer>
+	<script>
+		function openMn(mn) {
+				mn.classList.toggle("change");
+		}
+	</script>
 	<?php wp_footer(); ?>
 </body>
 </html>

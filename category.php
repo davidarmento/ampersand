@@ -1,3 +1,4 @@
+<?php get_header(); ?>
 <?php $post = $posts[0];  ?>
 	<?php  if (is_category()) { ?>
 	<?php } elseif( is_tag() ) { ?>
@@ -7,8 +8,9 @@
 	<?php  } elseif (is_month()) { ?><h2>Archivo para <?php the_time('F, Y'); ?>:</h2>
 	<?php } elseif (is_year()) { ?>
 		<h2>Archivo para <?php the_time('Y'); ?>:</h2>
-	<?php /} elseif (is_author()) { ?>
+	<?php } elseif (is_author()) { ?>
 		<h2>Archivo del autor </h2>
-	<?php } elseif (isset($_GET['paged']) &amp;amp;amp;&amp;amp;amp; !empty($_GET['paged'])) { ?>
+	<?php } elseif (isset($_GET['paged']) & !empty($_GET['paged'])) { ?>
 		<h2>Archivos del blog</h2>
 <?php } ?>
+<?php get_footer(); ?>
