@@ -1,8 +1,15 @@
 <?php
 // Registro del menú de WordPress
 
-add_theme_support( 'nav-menus' );
+//Only load jquery in footer
+if ( !is_admin() ) {
+    wp_deregister_script('jquery');
+    wp_register_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js', FALSE, '1.12.4', TRUE);
+    wp_enqueue_script('jquery');
+}
 
+//Main Menu
+add_theme_support( 'nav-menus' );
 if ( function_exists( 'register_nav_menus' ) ) {
     register_nav_menus(
         array(
